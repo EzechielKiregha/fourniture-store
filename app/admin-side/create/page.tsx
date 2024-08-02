@@ -1,3 +1,5 @@
+"use client"
+
 import React from 'react'
 import {
     Form,
@@ -5,13 +7,17 @@ import {
     FormControl,
     FormItem,
     FormLabel,
-    FormMessage
+    FormMessage,
+    FormDescription
 } from '@/components/ui/form'
 import * as z from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
+import { Input } from '@/components/ui/input'
+import { Button } from '@/components/ui/button'
+import toast from 'react-hot-toast'
 
 const formSchema = z.object({
     name : z.string().min(1, {
@@ -30,7 +36,7 @@ function CreateProduct() {
         }
     })
 
-    const { isSubmitted, isValid } = form.formState;
+    const { isSubmitting, isValid } = form.formState;
 
     const onSubmit = async (values : z.infer<typeof formSchema>) => {
         try {
@@ -39,9 +45,13 @@ function CreateProduct() {
             if(response.status === 200){
                 console.log("Product Created")
                 router.push(`/admin-side/product/${response.data.id}`)
+                toast.success('Produit ajouter avec succes')
+            } else {
+                toast.error('Echec ')
             }
         } catch (error) {
             console.log('Something went wrong')
+            toast.error('Echec interne ! ')
         }
     }
 
@@ -57,8 +67,41 @@ function CreateProduct() {
                 <Form {...form}>
                     <form 
                         onSubmit={form.handleSubmit(onSubmit)}
+                        className='pt-8 space-y-8'
                     >
-
+                        <FormField
+                            control={form.control}
+                            name="name"
+                            render={({field}) => (
+                            <FormItem>
+                                <FormLabel >
+                                    Nom du produit
+                                </FormLabel>
+                                <FormControl>
+                                    <Input
+                                        disabled = {isSubmitting}
+                                        placeholder='eg. table'
+                                        {...field}
+                                    />
+                                </FormControl>
+                                <FormDescription >
+                                    Tu peux toujours change ce nom de produit plutard
+                                </FormDescription>
+                                <FormMessage />
+                            </FormItem>
+                            )}
+                        />
+                        <div className="flex items-center gap-x-6">
+                            <Button onClick={() => router.push('/admin-side/')} type='button' variant='ghost'>
+                                Anuler
+                            </Button>
+                            <Button
+                                disabled={!isValid || isSubmitting}
+                                type='submit'
+                            >
+                                Continuer
+                            </Button>
+                        </div>
                     </form>
                 </Form>
             </div>

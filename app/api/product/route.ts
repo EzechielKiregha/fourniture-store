@@ -4,16 +4,17 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(req : NextRequest) {
     try {
 
-        const data = await req.json()
-        const {productName} = data
+        const { name } = await req.json()
 
-        if(!productName){
-            return new NextResponse("Name is Missing", {status : 301})
-        }
+        console.log('Nom :', name)
+
+        // if(!name){
+        //     return new NextResponse("Name is Missing", {status : 301})
+        // }
 
         const Product = await db.product.create({
             data : {
-                name : productName,
+                name : name,
             }
         })
 
