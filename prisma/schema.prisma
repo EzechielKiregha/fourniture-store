@@ -8,12 +8,20 @@ datasource db {
     relationMode = "prisma"
 }
 
-model User {
+model Admin {
     id String @id @default(uuid())
     email String 
     name String
+    phone String
     
-    product Product?
+}
+
+model OptCode {
+    id        String   @id @default(uuid())
+    phone     String
+    otp       String
+    createdAt DateTime @default(now())
+    expiresAt DateTime
 }
 
 model Product {
@@ -23,7 +31,6 @@ model Product {
     price Float?
     imageUrl String?
 
-    userId String? @unique
-    user User? @relation(fields : [userId], references : [id])
+    interestedUsers Int?
 }
 

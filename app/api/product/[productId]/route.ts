@@ -23,8 +23,32 @@ export async function GET(
         return new NextResponse("internal error", {status : 500})
     }
 
-
 }
-export async function PATCH(req : NextRequest){
+export async function PATCH(req : NextRequest,
+    { params } : { params : { productId : string }}
+){
+    try {
+        const productId  = params.productId
+        const values = await req.json()
+
+        const Product = await db.product.update({
+            where : {
+                id : productId
+            },
+            data : {
+                ...values
+            }
+        })
+
+        if(!Product){
+            return new NextResponse("Table Creation Failed",{status : 500})
+        }
+
+        return NextResponse.json(Product)
+        
+    } catch (error) {
+        console.log("Failed Error: ", )
+        return new NextResponse('Internal Error', {status : 500})
+    }
 
 }

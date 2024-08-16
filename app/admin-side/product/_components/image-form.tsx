@@ -37,7 +37,7 @@ function ImageForm({
                     ): !isEditing && (
                         <>
                         <Pencil className="h-4 w-4 mr-2"/>
-                        Modifier la photo
+                            Modifier la photo
                         </>
                     )}
                     

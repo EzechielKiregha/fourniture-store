@@ -55,8 +55,8 @@ const PriceForm = ({
 
     const onSubmit = async (values : z.infer<typeof formSchema>) => {
         try {
-            await axios.patch(`/api/courses/${productId}`, values)
-            toast.success("Course Updated Successfully")
+            await axios.patch(`/api/product/${productId}`, values)
+            toast.success("product Updated Successfully")
             toggleEdit()
             router.refresh()
         } catch {

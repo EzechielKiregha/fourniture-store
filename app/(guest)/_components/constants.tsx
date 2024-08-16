@@ -6,6 +6,11 @@ export const navLinks = [
     {href : "#", label : "Temoignages" },
     {href : "#", label : "Contact" },
 ]
+export const adminLinks = [
+    {href : "/admin-side", label : "Produits" },
+    {href : "#", label : "Clients" },
+    {href : "/", label : "Visiter Ma Boutique" },
+]
 
 export const productCard = [
     {

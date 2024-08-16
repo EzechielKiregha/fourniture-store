@@ -8,10 +8,6 @@ export async function POST(req : NextRequest) {
 
         console.log('Nom :', name)
 
-        // if(!name){
-        //     return new NextResponse("Name is Missing", {status : 301})
-        // }
-
         const Product = await db.product.create({
             data : {
                 name : name,
@@ -27,5 +23,19 @@ export async function POST(req : NextRequest) {
     } catch (error) {
         console.log("Failed Error: ", )
         return new NextResponse('Internal Error', {status : 500})
+    }
+}
+
+export async function GET(){
+    try {
+        const product = await db.product.findMany()
+        console.log("Products fetched:", product); 
+        if (product.length === 0){
+            return new NextResponse('No products found', {status : 404})
+        }
+        return NextResponse.json(product)
+    } catch (error) {
+        console.log("Error Fetching the Product:", error)
+        return new NextResponse("internal error", {status : 500})
     }
 }

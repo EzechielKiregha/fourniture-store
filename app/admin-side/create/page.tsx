@@ -18,6 +18,7 @@ import { useRouter } from 'next/navigation'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import toast from 'react-hot-toast'
+import Navbar from '@/app/(guest)/_components/navbar'
 
 const formSchema = z.object({
     name : z.string().min(1, {
@@ -56,6 +57,8 @@ function CreateProduct() {
     }
 
     return (
+        <>
+        <Navbar admin={true} auth={false}/>
         <div className="max-w-5xl mx-auto flex items-center justify-center h-full p-44">
             <div>
                 <h1 className="text-2xl">
@@ -106,6 +109,7 @@ function CreateProduct() {
                 </Form>
             </div>
         </div>
+        </>
     )
 }
 

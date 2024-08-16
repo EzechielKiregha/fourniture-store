@@ -64,7 +64,6 @@ const DescriptionForm = ({
             toast.error("Something Went Wrong")
         }
     }
-
   return (
     <div className="mt-6 border bg-slate-100 dark:bg-slate-800 dark:text-slate-200 p-4 rounded-md">
         <div className="flex font-medium items-center justify-between">

@@ -9,6 +9,10 @@ import NameForm from "../_components/name-form";
 import DescriptionForm from "../_components/description-form";
 import ImageForm from "../_components/image-form";
 import PriceForm from "../_components/price-form";
+import Navbar from "@/app/(guest)/_components/navbar";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { ArrowBack } from "@mui/icons-material";
 
 const ProductPage = async (
     { params } : { params : { productId : string }}
@@ -27,21 +31,28 @@ const ProductPage = async (
     }
 
     return (
-        <><div className="p-12">
+        <>
+        <Navbar admin={true} auth={false}/>
+        <div className="mt-20 m-4">
+            
             <div className="flex items-center justify-between">
                 <div className="gap-y-2 flex flex-col">
                     <h1 className="text-2xl font-medium">
                         Tout Concernant {product?.name}
                     </h1>
                 </div>
-                
+                <Link href='/admin-side'>
+                    <Button variant="link" className={`font-bold hover:text-red-600 text-black`}>
+                        <ArrowBack/>retour a la table de produits
+                    </Button>
+                </Link>
             </div>
             <div className="grid grid-clos-1 md:grid-cols-2 gap-6 mt-16">
                 <div>
                     <div className="flex items-center gap-x-2">
                         <LayoutDashboard className="h-6 w-6 mr-2" />
                         <h2 className="text-xl">
-                            Customize your product
+                            Personnalizer ton product
                         </h2>
                     </div>
                     <ImageForm
@@ -57,15 +68,6 @@ const ProductPage = async (
                     
                 </div>
                 <div className="space-y-2">
-                    <div>
-                        <div className="flex items-center gap-x-2">
-                            <ListChecks height={6} width={6} />
-                            <h2 className="text-xl">
-                                product Chapters
-                            </h2>
-                        </div>
-                        
-                    </div>
                     <div>
                         <div className="flex items-center gap-x-2">
                             <CircleDollarSign className="h-6 w-6" />

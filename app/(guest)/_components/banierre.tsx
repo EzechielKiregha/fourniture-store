@@ -22,7 +22,7 @@ function Banniere() {
                     <a href="#menu" className="bg-red-600 text-white text-xl py-2 px-4 rounded hover:bg-red-700 transition duration-300">
                         Notre Collection
                     </a>
-                    <a href="Pay.html" className="bg-gray-600 text-white text-xl py-2 px-4 rounded hover:bg-gray-700 transition duration-300">
+                    <a href="#" className="bg-gray-600 text-white text-xl py-2 px-4 rounded hover:bg-gray-700 transition duration-300">
                         Commander
                     </a>
                 </div>
